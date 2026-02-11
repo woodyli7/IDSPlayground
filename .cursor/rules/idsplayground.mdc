@@ -1,0 +1,168 @@
+# IDSPlayground — Cursor Rules
+
+You are working on **IDSPlayground**, a SwiftUI iOS app for prototyping Instacart user flows using the Instacart Design System (IDS). Follow these rules for all code generation and editing.
+
+## Audience
+
+Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their designs into working iOS prototypes. They have minimal coding, terminal, or git knowledge. Their workflow: design in Figma, describe what to build in Cursor, preview in Xcode.
+
+## Design Enforcement Rules
+
+1. **Strict visual parity**
+   Use colors, typography, spacing, icons, images, and all visual details exactly as defined in Figma. Do not infer, approximate, or substitute.
+
+2. **No assumptions**
+   If any requirement is unclear, ambiguous, or missing, stop and ask for clarification before proceeding.
+
+3. **Design system enforcement — always verify, never assume**
+   If any color, font, or spacing value from a Figma design does not **exactly match** a defined token in `IDSColors`, `IDSTypography`, or `IDSSpacing`, **stop and ask the user to verify or clarify** before proceeding. Specifically:
+   - **Colors:** If a hex value doesn't match any `IDSColors` token, flag it. Do not pick the "closest" token.
+   - **Fonts:** If a font name, weight, or size doesn't match any `IDSTypography` token, flag it. Do not approximate with a similar style.
+   - **Spacing:** If a padding or gap value doesn't match any `IDSSpacing` token, flag it. Do not round to the nearest token.
+   - **Icons/Images:** If an asset is referenced but not found in `Assets.xcassets` or the design system, flag it.
+   Always list the exact mismatched value and ask whether it should map to an existing token or be added as a new one.
+
+4. **Navigation clarity required**
+   If any screen navigation, routing, or transition logic is unclear, ask before implementing.
+
+5. **Component logic clarity required**
+   If any component state, interaction, or behavior is unclear, ask before implementing.
+
+6. **Feature logic clarity required**
+   If any feature-level logic or data flow is unclear, ask before implementing.
+
+7. **Asset completeness**
+   If any required icon, image, or asset is missing or undefined, ask before proceeding.
+
+## Xcode Behavior
+
+- **Xcode 16+ automatically syncs new files.** New `.swift` files created inside the `IDSPlayground/` source folder are automatically detected and included in the build target. No manual "Add to target" step is needed.
+
+## Terminology
+
+7 user-facing terms. Use Figma-friendly language. Code equivalents shown for Cursor's internal mapping.
+
+- **Flow** — A multi-screen user journey (code: folder under `Features/` with `NavigationStack`). Example: "The Order Card flow has 4 screens."
+- **Screen / Frame** — A full-screen UI. Interchangeable: "screen" for the app, "frame" in Figma. Same thing. (code: a SwiftUI `View` struct, maps to a Step enum case)
+- **Page** — A tab in a Figma file containing multiple frames. Not an app concept. Navigate to the right page in Figma, select the frame, and Cursor reads it via the Figma plugin (MCP). Alternatively, share a screenshot or Figma URL.
+- **Component** — A reusable UI piece (code: struct in `DesignSystem/Components/`). Components already follow IDS naming. Example: "Use the IDSButton component."
+- **Overlay** — Something on top of a screen: modal, sheet, dialog (code: `.sheet()`, `.fullScreenCover()`, `.overlay()`). Example: "Tapping Help shows a help overlay."
+- **Token** — A named design value: color, font, or spacing (code: `IDSColors`, `IDSTypography`, `IDSSpacing`). Example: "Use the brandTertiaryLight token."
+- **Asset** — An icon, image, or illustration (code: file in `Assets.xcassets/`). Example: "The confirmation screen uses the card-wings asset."
+
+Hierarchy: **Flow** > **Screen** (+ **Overlays**), built with **Components**, styled with **Tokens**, using **Assets**.
+
+Internal code terms (NOT user-facing, handle automatically):
+- "Step" — enum case mapping screens to navigation states
+- "View" — SwiftUI protocol; screens, overlays, and components are all Views
+- "Route" / "Destination" / "NavigationStack" — iOS navigation concepts
+
+## Architecture
+
+- **Pattern:** MVVM + Flow Coordinators
+- **Navigation:** `NavigationStack` with enum-based type-safe routing (iOS 16+)
+- **State:** `@Observable` classes (iOS 17+), injected via `.environment(viewModel)`
+- **Root routing:** `ContentView` uses `@State private var activeFlow: AppFlow?` to switch between flows — no nested NavigationStacks
+
+## Project Structure
+
+```
+Features/{FlowName}/
+├── {FlowName}Flow.swift          # Flow coordinator (owns NavigationStack)
+├── {FlowName}ViewModel.swift     # @Observable ViewModel + {FlowName}Step enum
+└── Views/
+    ├── FirstScreenView.swift
+    └── ...
+```
+
+```
+DesignSystem/
+├── Tokens/                       # IDSColors, IDSTypography, IDSSpacing
+└── Components/                   # IDS-prefixed reusable components
+```
+
+## Design System Token Reference
+
+### Colors (IDSColors)
+
+**Brand:** `brandTertiaryLight` (#f7f5f0)
+**Grayscale:** `grayscale00` (white), `grayscale20` (#e8e9eb), `grayscale70` (#343538), `grayscale80` (#242529)
+**Content:** `contentSecondary` (#56595e)
+**Button enabled:** `buttonPrimaryBg` (#108910), `buttonPrimaryContent` (white)
+**Button disabled:** `buttonDisabledBg` (#f6f7f8), `buttonDisabledContent` (#c7c8cd)
+**Input default:** `inputBorder` (#8f939b), `inputBackground` (white), `inputTextLabel` (#242529), `inputTextInput` (#242529)
+**Input active:** `inputBorderActive` (#242529)
+**Input invalid:** `inputBorderInvalid` (#de3534), `inputBackgroundInvalid` (#fef0f0), `inputErrorContent` (#de3534)
+**Badge:** `badgeBackground` (#242529), `badgeBackgroundCritical` (#de3534), `badgeContent` (white), `badgeBorder` (white)
+**Vehicle:** `vehicleBlack`, `vehicleCashew`, `vehicleLemon`, `vehicleKale`, `vehiclePlum`, `vehicleBlue`, `vehicleRed`
+
+### Typography (IDSTypography)
+
+- `headline` — Subhead SemiBold, 24px, lineHeight 28px
+- `title` — Subhead SemiBold, 18px, lineHeight 22px
+- `subtitle` — Text SemiBold, 14px, lineHeight 20px
+- `button` — Subhead SemiBold, 18px, lineHeight 18px
+- `buttonSmall` — Subhead SemiBold, 14px, lineHeight 18px
+- `bodyRegular` — Text Regular, 12px, lineHeight 18px
+- `bodyEmphasized` — Text SemiBold, 12px, lineHeight 18px
+- `accentRegular` — Text Regular, 10px, lineHeight 14px
+- `accentEmphasized` — Text SemiBold, 10px, lineHeight 14px
+
+### Spacing (IDSSpacing)
+
+`none` (0), `xxs` (2), `xs` (4), `sm` (8), `md` (12), `lg` (16), `xl` (24), `xxl` (32), `xxxl` (48)
+
+## Coding Conventions
+
+### File Structure
+- Every file starts with a header comment: purpose, flow context
+- Use `// MARK: -` to organize sections
+- Include `#Preview` at the bottom of every view file
+- Step enums live in the ViewModel file, not in a separate file
+
+### Naming
+- Views: `{ScreenName}View.swift`
+- ViewModels: `{FlowName}ViewModel.swift`
+- Flow coordinators: `{FlowName}Flow.swift`
+- Design components: `IDS{ComponentName}.swift`
+- Design tokens: `IDS{Category}.swift`
+
+### Figma-to-Code Name Mapping
+
+Figma IDS components use dot-slash hierarchy. Map them to code as follows:
+
+- `IDS.Button / Standard` → `IDSButton.swift` in `DesignSystem/Components/` (variant `Standard` becomes a parameter or enum case)
+- `IDS.Input/IDS.TextField` → `IDSTextField.swift` in `DesignSystem/Components/` (deepest component name becomes the filename)
+- `{FlowName}-{description}` asset layer → `Image("{FlowName}-{description}")` in code
+- `{ScreenName}View` frame → `Features/{FlowName}/Views/{ScreenName}View.swift`
+- State suffixes (` - Default`, ` - Active`, ` - Disabled`, ` - Error`) indicate component states to implement, not separate files
+
+### Navigation
+- Each flow owns its own `NavigationStack(path:)` bound to `viewModel.path`
+- Use `.navigationDestination(for: {Step}.self)` for routing
+- Always hide system nav bar (`.navigationBarHidden(true)`) — use custom top nav instead
+- Pass `onDismiss: () -> Void` closures for flow exit, bubbling up to ContentView
+
+### State Management
+- ViewModels are `@Observable` classes
+- Views access ViewModel via `@Environment(FlowViewModel.self) private var viewModel`
+- Views should be as stateless as possible; state lives in ViewModel
+- Use computed properties for derived state
+
+### SwiftUI Patterns
+- Use `VStack(spacing: IDSSpacing.none)` as the root layout — control spacing explicitly
+- Background colors go on the outermost container
+- Use `Spacer()` for flexible layout, not arbitrary padding
+- **ALWAYS** use `IDSColors` for colors — never hardcode hex values
+- **ALWAYS** use `IDSTypography` for fonts — never use `.font(.title)` or `.font(.system(...))`
+- **ALWAYS** use `IDSSpacing` for padding/spacing — never hardcode numeric values
+
+## When Adding a New Flow
+
+Refer to `FLOW_TEMPLATE.md` in the project root for the full checklist.
+
+## References
+
+- Design system reference: `SPEC.md`
+- Flow template: `FLOW_TEMPLATE.md`
+- Getting started: `README.md`

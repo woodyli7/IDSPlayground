@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>IDSPlayground</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Instacart_Sans_Subhead_v_1_1-Bold.ttf</string>
+		<string>Instacart_Sans_Subhead_v_1_1-ExtraBold.ttf</string>
+		<string>Instacart_Sans_Subhead_v_1_1-Regular.ttf</string>
+		<string>Instacart_Sans_Subhead_v_1_1-SemiBold.ttf</string>
+		<string>Instacart_Sans_Subhead_v1_1-Bold_Italic.ttf</string>
+		<string>Instacart_Sans_Subhead_v1_1-ExtraBold_Italic.ttf</string>
+		<string>Instacart_Sans_Subhead_v1_1-Regular_Italic.ttf</string>
+		<string>Instacart_Sans_Subhead_v1_1-SemiBold_Italic.ttf</string>
+		<string>Instacart_Sans_Text_v_1_1-Bold.ttf</string>
+		<string>Instacart_Sans_Text_v_1_1-ExtraBold.ttf</string>
+		<string>Instacart_Sans_Text_v_1_1-Regular.ttf</string>
+		<string>Instacart_Sans_Text_v_1_1-SemiBold.ttf</string>
+		<string>Instacart_Sans_Text_v1_1-Bold_Italic.ttf</string>
+		<string>Instacart_Sans_Text_v1_1-ExtraBold_Italic.ttf</string>
+		<string>Instacart_Sans_Text_v1_1-Regular_Italic.ttf</string>
+		<string>Instacart_Sans_Text_v1_1-SemiBold_Italic.ttf</string>
+	</array>
+</dict>
+</plist>
