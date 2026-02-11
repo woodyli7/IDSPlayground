@@ -51,7 +51,7 @@ See **FLOW_TEMPLATE.md** for the full step-by-step guide.
 
 ---
 
-## Adding Image
+## Adding Images
 
 Same process as icons:
 
