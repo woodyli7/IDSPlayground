@@ -51,18 +51,7 @@ See **FLOW_TEMPLATE.md** for the full step-by-step guide.
 
 ---
 
-## Adding Icons
-
-1. In **Figma**, select the icon you want to export
-2. Export it as **PDF** (vector format — keeps it crisp at all sizes)
-3. In **Xcode**, find the **Assets.xcassets** folder in the left sidebar
-4. **Drag the PDF file** from Finder into the Assets panel
-5. Xcode will create an image set automatically
-6. Tell Cursor the asset name so it can reference it in code
-
----
-
-## Adding Images
+## Adding Image
 
 Same process as icons:
 
