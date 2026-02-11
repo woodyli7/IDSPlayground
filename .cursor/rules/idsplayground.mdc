@@ -34,6 +34,25 @@ Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their 
 7. **Asset completeness**
    If any required icon, image, or asset is missing or undefined, ask before proceeding.
 
+## Figma Input Rules
+
+1. **Always use Figma MCP — never ask for screenshots**
+   The Figma MCP provides structured design data (colors, fonts, spacing, layout) with exact values. Always use it as the primary way to read Figma designs. Never proactively suggest or request screenshots — screenshots are lossy and cannot guarantee accurate token values.
+
+2. **Prefer Figma URLs over selection**
+   When the user wants to build from a Figma design, ask them to provide **Figma URLs** (right-click frame > "Copy link to selection"). URLs are preferred because they are reliable, batchable, and create a record of what was referenced.
+   - For **multi-state components**: Ask for a URL for each state/variant (e.g., Default, Active, Disabled, Error). Read all URLs via `get_design_context` in parallel before writing code.
+   - For **multi-screen flows**: Ask for a URL for each screen frame. Read all in parallel to understand the full flow before building.
+   - **Selection is fine for quick single-frame checks** during iteration (e.g., "I updated the frame, re-read it"). But for initial builds, always prefer URLs.
+   Extract the node ID from each URL and call `get_design_context` for each one.
+
+3. **If the MCP call fails — troubleshoot, then fall back**
+   When a Figma MCP call fails or returns an error, walk the user through these steps in order:
+   1. **Toggle the MCP:** Go to Cursor Settings > MCP, find the Figma entry, turn it off, wait a few seconds, turn it back on. (This fixes the most common issue.)
+   2. **Check Figma desktop app:** Make sure the Figma desktop app is open — the browser version does not work with MCP.
+   3. **Restart Cursor:** If the toggle didn't help, quit and reopen Cursor.
+   4. **Screenshot fallback (last resort only):** If MCP still doesn't work after the above steps, accept a screenshot but warn the user that exact token values cannot be verified. Flag every color, font, and spacing value as "unverified — needs manual confirmation against the design system tokens."
+
 ## Xcode Behavior
 
 - **Xcode 16+ automatically syncs new files.** New `.swift` files created inside the `IDSPlayground/` source folder are automatically detected and included in the build target. No manual "Add to target" step is needed.
@@ -44,7 +63,7 @@ Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their 
 
 - **Flow** — A multi-screen user journey (code: folder under `Features/` with `NavigationStack`). Example: "The Order Card flow has 4 screens."
 - **Screen / Frame** — A full-screen UI. Interchangeable: "screen" for the app, "frame" in Figma. Same thing. (code: a SwiftUI `View` struct, maps to a Step enum case)
-- **Page** — A tab in a Figma file containing multiple frames. Not an app concept. Navigate to the right page in Figma, select the frame, and Cursor reads it via the Figma plugin (MCP). Alternatively, share a screenshot or Figma URL.
+- **Page** — A tab in a Figma file containing multiple frames. Not an app concept. Share a Figma URL for the frame you want built (preferred), or select the frame in the Figma desktop app for quick checks. Do not use screenshots as the primary input — see Figma Input Rules above.
 - **Component** — A reusable UI piece (code: struct in `DesignSystem/Components/`). Components already follow IDS naming. Example: "Use the IDSButton component."
 - **Overlay** — Something on top of a screen: modal, sheet, dialog (code: `.sheet()`, `.fullScreenCover()`, `.overlay()`). Example: "Tapping Help shows a help overlay."
 - **Token** — A named design value: color, font, or spacing (code: `IDSColors`, `IDSTypography`, `IDSSpacing`). Example: "Use the brandTertiaryLight token."
