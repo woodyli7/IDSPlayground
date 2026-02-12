@@ -1,111 +1,55 @@
-# IDSPlayground
+# StarterPack
 
-A ready-to-use iOS prototyping starter pack built on the **Instacart Design System (IDS)**. Open it, run it, and start building flows.
-
----
-
-## What's Included
-
-- **Fonts**: All 16 Instacart Sans font files (Subhead + Text families), pre-registered and ready to use
-- **Color tokens**: Every IDS color — brand, grayscale, button, input, vehicle colors
-- **Typography tokens**: Headline, title, subtitle, body, accent, and button styles
-- **Spacing tokens**: A consistent spacing scale from 0px to 48px
-- **Architecture**: MVVM + Flow Coordinators pattern, ready for multi-screen flows
-- **Cursor rules**: AI co-pilot instructions that enforce IDS design system usage
+Design in Figma, build in Cursor, preview in Xcode.
 
 ---
 
-## Prerequisites
+## Step 1: Test the Example
 
-- **Xcode 16+** (free from the Mac App Store)
-- **Cursor IDE** (for AI-assisted code generation)
-
----
-
-## Getting Started
-
-### 1. Open the project
-
-Unzip the folder (if zipped), then double-click **`IDSPlayground.xcodeproj`** to open it in Xcode.
-
-### 2. Run it
-
-Click the **Play button** (triangle icon, top-left of Xcode) or press **Cmd + R**. You should see a screen that says "IDSPlayground — Design system ready."
-
-If the text renders in the correct Instacart Sans font, everything is working.
-
-### 3. Open in Cursor
-
-Open the `IDSPlayground` folder in Cursor. This is where you'll do most of your work — describing what to build, and letting Cursor generate the code.
+1. Unzip the **StarterPack** folder
+2. Install Xcode
+3. Open {StarterPack} in Xcode
+4. Press **Cmd + R** to build and wait for it to compile
+5. You should see the **Landing page** screen. If everything renders correctly, you're good to go
 
 ---
 
-## Adding Your First Flow
+## Step 2: Connect Figma
 
-1. Open the project folder in **Cursor**
-2. Tell Cursor: *"Create a new flow called [YourFlowName] following FLOW_TEMPLATE.md"*
-3. Cursor will create the folder structure, ViewModel, Flow coordinator, and screen views
-4. Run in Xcode to preview
-
-See **FLOW_TEMPLATE.md** for the full step-by-step guide.
-
----
-
-## Adding Icons
-
-1. In **Figma**, select the icon you want to export
-2. Export it as **PDF** (vector format — keeps it crisp at all sizes)
-3. In **Xcode**, find the **Assets.xcassets** folder in the left sidebar
-4. **Drag the PDF file** from Finder into the Assets panel
-5. Xcode will create an image set automatically
-6. Tell Cursor the asset name so it can reference it in code
+1. Install Cursor
+2. Open the **StarterPack** folder in Cursor
+3. Go to **Cursor Settings > Tools & MCP setting**. If there's no figma MCP setup yet. Youtube "how to setup figma mcp in cursor" and set it up.
+4. Find the **Figma** entry — toggle it **off**, wait a few seconds, then toggle it **back on**
+5. Confirm the Figma MCP shows **green** (connected)
+6. Test it: Copy 1st Prompt in Figma’s [Prompt starter] frame
 
 ---
 
-## Adding Images
+## Step 3: Design
 
-Same process as icons:
-
-1. Export from **Figma** as **PDF** (vector) or **PNG** (raster)
-2. Drag into **Assets.xcassets** in Xcode
-3. Use a clear naming convention: `{FlowName}-{description}` (e.g., `OrderCard-confirmation`)
-4. Tell Cursor the asset name
+1. Duplicate the Figma template and start designing your flow:
+   [IDS Playground 1.0 — Duplicate to start](https://www.figma.com/design/tayo6qQRn74SnXIpUxsGsK/IDS-Playground-1.0-%7BDuplicate-to-start%7D?node-id=14310-134&t=7w7wzchP5hp328dB-1)
+2. Build your screens using the **8 code-ready IDS components** included in the template
 
 ---
 
-## Customizing the App
+## Step 4: Plan
 
-### Change the app display name
-
-1. In Xcode, open **IDSPlayground/Info.plist** in the left sidebar
-2. Find `CFBundleDisplayName`
-3. Change `IDSPlayground` to your preferred name
-
-### Change the bundle identifier
-
-1. In Xcode, click the **IDSPlayground** project (blue icon) in the left sidebar
-2. Select the **IDSPlayground** target
-3. In the **General** tab, find **Bundle Identifier**
-4. Change `com.instacart.IDSPlayground` to your own
+1. Paste 2nd Prompt, Add few basic logic and interactions you need. Start Plan
+2. Paste 3rd Prompt, let AI self review/validate plan
+3. Execute the plan
 
 ---
 
-## Troubleshooting
+## Step 5: Build
 
-**Fonts look wrong (system font instead of Instacart Sans)**
-- In Xcode: **Product > Clean Build Folder** (Cmd + Shift + K), then run again
-
-**"File not found" errors**
-- Make sure the file is inside the `IDSPlayground/` source folder (not at the project root)
-- Xcode's file system sync automatically picks up files in this folder
-
-**Preview not updating**
-- In Xcode: **Editor > Canvas > Refresh All Previews** (Cmd + Option + P)
+1. Press **Cmd + R** in Xcode to build
+2. Preview your flow on the simulator
+3. Iterate: make changes in Cursor, build in Xcode, repeat
 
 ---
 
-## Project References
+## References
 
-- **SPEC.md** — Design system reference (tokens, architecture, terminology)
-- **FLOW_TEMPLATE.md** — Step-by-step guide for adding new flows
-- **.cursor/rules/idsplayground.mdc** — Cursor AI rules (design enforcement, conventions)
+- **[SPEC.md](SPEC.md)** — Design system tokens, architecture, and conventions
+- **[FLOW_TEMPLATE.md](FLOW_TEMPLATE.md)** — Step-by-step guide for adding new flows
