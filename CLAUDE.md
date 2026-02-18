@@ -1,10 +1,10 @@
-# IDSPlayground — Cursor Rules
+# IDSPlayground — Project Rules
 
 You are working on **IDSPlayground**, a SwiftUI iOS app for prototyping Instacart user flows using the Instacart Design System (IDS). Follow these rules for all code generation and editing.
 
 ## Audience
 
-Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their designs into working iOS prototypes. They have minimal coding, terminal, or git knowledge. Their workflow: design in Figma, describe what to build in Cursor, preview in Xcode.
+Designers who are fluent in Figma and IDS, and use Claude Code or Cursor + Xcode to turn their designs into working iOS prototypes. They have minimal coding, terminal, or git knowledge. Their workflow: design in Figma, describe what to build in Claude Code or Cursor, preview in Xcode.
 
 ## Design Enforcement Rules
 
@@ -48,10 +48,11 @@ Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their 
 
 3. **If the MCP call fails — troubleshoot, then fall back**
    When a Figma MCP call fails or returns an error, walk the user through these steps in order:
-   1. **Toggle the MCP:** Go to Cursor Settings > MCP, find the Figma entry, turn it off, wait a few seconds, turn it back on. (This fixes the most common issue.)
+   1. **Restart the MCP connection:** Toggle it off/on in your AI tool's MCP settings.
    2. **Check Figma desktop app:** Make sure the Figma desktop app is open — the browser version does not work with MCP.
-   3. **Restart Cursor:** If the toggle didn't help, quit and reopen Cursor.
-   4. **Screenshot fallback (last resort only):** If MCP still doesn't work after the above steps, accept a screenshot but warn the user that exact token values cannot be verified. Flag every color, font, and spacing value as "unverified — needs manual confirmation against the design system tokens."
+   3. **Check MCP server:** Ensure the Figma MCP server is running (it serves on `http://127.0.0.1:3845/mcp`).
+   4. **Restart the AI tool:** If the above didn't help, quit and reopen the AI tool.
+   5. **Screenshot fallback (last resort only):** If MCP still doesn't work after the above steps, accept a screenshot but warn the user that exact token values cannot be verified. Flag every color, font, and spacing value as "unverified — needs manual confirmation against the design system tokens."
 
 ## Xcode Behavior
 
@@ -59,7 +60,7 @@ Designers who are fluent in Figma and IDS, and use Cursor + Xcode to turn their 
 
 ## Terminology
 
-7 user-facing terms. Use Figma-friendly language. Code equivalents shown for Cursor's internal mapping.
+7 user-facing terms. Use Figma-friendly language. Code equivalents shown for internal mapping.
 
 - **Flow** — A multi-screen user journey (code: folder under `Features/` with `NavigationStack`). Example: "The Order Card flow has 4 screens."
 - **Screen / Frame** — A full-screen UI. Interchangeable: "screen" for the app, "frame" in Figma. Same thing. (code: a SwiftUI `View` struct, maps to a Step enum case)

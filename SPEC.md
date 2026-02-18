@@ -103,7 +103,7 @@ IDSPlayground/
 │               ├── FirstScreenView.swift
 │               └── ...
 │
-├── .cursor/rules/idsplayground.mdc     # Cursor AI rules
+├── CLAUDE.md                            # AI project rules (Claude Code and Cursor)
 ├── FLOW_TEMPLATE.md                    # How to add a new flow
 ├── SPEC.md                             # This file
 └── README.md                           # Getting started guide

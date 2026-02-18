@@ -1,6 +1,6 @@
 # StarterPack
 
-Design in Figma, build in Cursor, preview in Xcode.
+Design in Figma, build in Claude Code or Cursor, preview in Xcode.
 
 ---
 
@@ -16,12 +16,12 @@ Design in Figma, build in Cursor, preview in Xcode.
 
 ## Step 2: Connect Figma
 
-1. Install Cursor
-2. Open the **StarterPack** folder in Cursor
-3. Go to **Cursor Settings > Tools & MCP setting**. If there's no figma MCP setup yet. Youtube "how to setup figma mcp in cursor" and set it up.
+1. Install Claude Code or Cursor
+2. Open the **StarterPack** folder in Claude Code or Cursor
+3. Go to your AI tool's **MCP settings** and set up the Figma MCP if it isn't configured yet
 4. Find the **Figma** entry — toggle it **off**, wait a few seconds, then toggle it **back on**
 5. Confirm the Figma MCP shows **green** (connected)
-6. Test it: Copy 1st Prompt in Figma’s [Prompt starter] frame
+6. Test it: Copy 1st Prompt in Figma's [Prompt starter] frame
 
 ---
 
@@ -45,7 +45,7 @@ Design in Figma, build in Cursor, preview in Xcode.
 
 1. Press **Cmd + R** in Xcode to build
 2. Preview your flow on the simulator
-3. Iterate: make changes in Cursor, build in Xcode, repeat
+3. Iterate: make changes in Claude Code or Cursor, build in Xcode, repeat
 
 ---
 
