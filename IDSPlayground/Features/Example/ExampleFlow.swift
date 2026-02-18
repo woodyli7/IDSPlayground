@@ -3,7 +3,7 @@
 //  IDSPlayground
 //
 //  Flow coordinator for the Example flow.
-//  Multi-screen flow: FirstScreenView → HubView (tabbed).
+//  Multi-screen flow: HubView → FirstScreenView.
 //
 
 import SwiftUI
@@ -16,11 +16,11 @@ struct ExampleFlow: View {
 
     var body: some View {
         NavigationStack(path: $viewModel.path) {
-            FirstScreenView(onDismiss: onDismiss)
+            HubView(onDismiss: onDismiss)
                 .navigationDestination(for: ExampleStep.self) { step in
                     switch step {
-                    case .hub:
-                        HubView()
+                    case .firstScreen:
+                        FirstScreenView()
                     }
                 }
         }

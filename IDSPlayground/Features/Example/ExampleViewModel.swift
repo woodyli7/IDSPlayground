@@ -3,7 +3,7 @@
 //  IDSPlayground
 //
 //  ViewModel and step enum for the Example flow.
-//  Multi-screen flow: FirstScreenView → HubView (tabbed).
+//  Multi-screen flow: HubView → FirstScreenView.
 //
 
 import SwiftUI
@@ -13,7 +13,7 @@ import SwiftUI
 /// Navigation steps for the Example flow.
 /// The first screen is the root of NavigationStack (not in this enum).
 enum ExampleStep: Hashable {
-    case hub
+    case firstScreen
 }
 
 // MARK: - View Model
@@ -62,9 +62,6 @@ class ExampleViewModel {
     }
 
     func navigateToStep(_ step: ExampleStep) {
-        if step == .hub {
-            selectedTabIndex = 0
-        }
         path.append(step)
     }
 

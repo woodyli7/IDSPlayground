@@ -2,9 +2,9 @@
 //  HubView.swift
 //  IDSPlayground
 //
-//  Second screen of the Example flow — tabbed hub.
-//  Displays user address from FirstScreenView in Tab.FirstTab,
-//  and a placeholder image in Tab.SecondTab.
+//  First screen of the Example flow — tabbed hub.
+//  Displays section titles with tabs,
+//  and a "Click me" button to navigate to FirstScreenView.
 //
 
 import SwiftUI
@@ -13,6 +13,7 @@ import SwiftUI
 
 struct HubView: View {
     @Environment(ExampleViewModel.self) private var viewModel
+    var onDismiss: () -> Void
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -23,7 +24,7 @@ struct HubView: View {
             IDSTopNav(
                 title: "Shopper",
                 leadingIcon: "IDS.Icon.ArrowLeft",
-                leadingAction: { viewModel.navigateBack() },
+                leadingAction: { onDismiss() },
                 trailingPrimaryIcon: "IDS.Icon.ShareiOS"
             )
 
@@ -70,8 +71,8 @@ private extension HubView {
             )
 
             IDSSectionTitle(viewModel.addressText, hierarchy: .headline) {
-                IDSButton("Go back", type: .tertiary, size: .compact) {
-                    viewModel.navigateBack()
+                IDSButton("Click me", type: .tertiary, size: .compact) {
+                    viewModel.navigateToStep(.firstScreen)
                 }
             }
         }
@@ -87,7 +88,7 @@ private extension HubView {
 
 #Preview {
     NavigationStack {
-        HubView()
+        HubView(onDismiss: {})
             .environment(ExampleViewModel())
     }
 }

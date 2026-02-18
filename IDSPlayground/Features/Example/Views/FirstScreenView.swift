@@ -2,7 +2,7 @@
 //  FirstScreenView.swift
 //  IDSPlayground
 //
-//  First (and only) screen of the Example flow.
+//  Second screen of the Example flow.
 //  Demonstrates IDSTopNav, IDSSectionTitle, IDSContentRow,
 //  IDSAddress, and IDSButton in a sticky header/footer layout.
 //
@@ -13,7 +13,6 @@ import SwiftUI
 
 struct FirstScreenView: View {
     @Environment(ExampleViewModel.self) private var viewModel
-    var onDismiss: () -> Void
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -23,7 +22,7 @@ struct FirstScreenView: View {
             // -- Sticky Header --
             IDSTopNav(
                 leadingIcon: "IDS.Icon.ArrowLeft",
-                leadingAction: { onDismiss() }
+                leadingAction: { viewModel.navigateBack() }
             )
 
             // -- Scrollable Content --
@@ -65,7 +64,7 @@ struct FirstScreenView: View {
 
             // -- Sticky Footer --
             IDSButton("CTA", type: .primary, isEnabled: viewModel.isCTAEnabled) {
-                viewModel.navigateToStep(.hub)
+                viewModel.navigateBack()
             }
                 .padding(.horizontal, IDSSpacing.lg)
                 .padding(.bottom, IDSSpacing.sm)
@@ -79,7 +78,7 @@ struct FirstScreenView: View {
 
 #Preview {
     NavigationStack {
-        FirstScreenView(onDismiss: {})
+        FirstScreenView()
             .environment(ExampleViewModel())
     }
 }
